@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% comment %} ******* done ***** {% endcomment %}
+{% load static %}
+{% block title %}Resume Builder Form{% endblock %}
+{% block linkCSS %}
+<link rel="stylesheet" href="{% static "coreBuilder/resumeFormStyle.css" %}">
+ {% endblock %}
+{% block content %}
+
+<div class="heading">
+    <h1>Update Resume Form</h1>
+    <hr>
+</div>
+<form method="post" class="resume-form">
+  {% csrf_token %}
+
+  <h2>Personal Details</h2>
+  <div class="personal">
+    <label>First Name</label>
+    <input type="text" name="firstName" placeholder="First name" required value="{{ resume.firstName }}">
+
+    <label>Last Name</label>
+    <input type="text" name="lastName" placeholder="Last name" value="{{ resume.lastName }}">
+
+    <label>Mobile Number</label>
+    <input type="text" name="mobileNumber" placeholder="Mobile number" value="{{ resume.mobileNumber }}">
+
+    <label>Email</label>
+    <input type="text" name="email" placeholder="Email" value="{{ resume.email }}">
+
+    <label>Portfolio Link</label>
+    <input type="text" name="portfolioLink" placeholder="Portfolio link" value="{{ resume.portfolioLink }}">
+
+    <label>LinkedIn Link</label>
+    <input type="text" name="linkedinLink" placeholder="LinkedIn link" value="{{ resume.linkedinLink }}">
+  </div>
+
+  <h2>Summary</h2>
+  <div class="summary">
+    <label>Profile Summary</label>
+    <textarea name="summary" placeholder="Profile summary (max 3 sentences)">{{ resume.summary }}</textarea>
+  </div>
+
+  <h2>Education</h2>
+  <div class="education">
+    <label>College Name</label>
+    <input type="text" name="collegeName" placeholder="College name" value="{{ resume.collegeName }}">
+
+    <label>Branch</label>
+    <input type="text" name="collegeBranch" placeholder="Branch" value="{{ resume.collegeBranch }}">
+
+    <label>Location</label>
+    <input type="text" name="collegeLocation" placeholder="Location" value="{{ resume.collegeLocation }}">
+
+    <div class="education-duration">
+      <label>Start Year</label>
+      <input type="text" name="collegeStart" placeholder="Start year" value="{{ resume.collegeStart }}">
+
+      <label>End Year</label>
+      <input type="text" name="collegeEnd" placeholder="End year" value="{{ resume.collegeEnd }}">
+      <label>Achivements in college
+              <input type="text" name="collegeAchivements" placeholder="Achivemnts in college" value="{{ resume.collegeAchivements }}">
+      </label>
+    </div>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <label>Technical Skills</label>
+    <input type="text" name="skillsTechnical" placeholder="Technical skills (comma-separated)" value="{{ resume.skillsTechnical }}">
+
+    <label>Tools</label>
+    <input type="text" name="skillsTools" placeholder="Known tools (comma-separated)" value="{{ resume.skillsTools }}">
+  </div>
+
+  <h2>Certifications</h2>
+  <div class="certifications">
+    <label>Certificate 1</label>
+    <input type="text" name="certificate1" placeholder="Certificate name" value="{{ resume.certificate1 }}">
+
+    <label>Certificate 1 Link</label>
+    <input type="text" name="certificate1Link" placeholder="Certificate link" value="{{ resume.certificate1Link }}">
+
+    <label>Certificate 2</label>
+    <input type="text" name="certificate2" placeholder="Certificate name" value="{{ resume.certificate2 }}">
+
+    <label>Certificate 2 Link</label>
+    <input type="text" name="certificate2Link" placeholder="Certificate link" value="{{ resume.certificate2Link }}">
+  </div>
+
+  <h2>Experience</h2>
+  <div class="company">
+    <label>Company Name</label>
+    <input type="text" name="companyName" placeholder="Company name" value="{{ resume.companyName }}">
+
+    <label>Location</label>
+    <input type="text" name="companyLocation" placeholder="Location" value="{{ resume.companyLocation }}">
+
+    <label>Position</label>
+    <input type="text" name="companyPosition" placeholder="Position" value="{{ resume.companyPosition }}">
+
+    <div class="company-service-duration">
+      <label>Start Year</label>
+      <input type="text" name="companyStart" placeholder="Start year" value="{{ resume.companyStart }}">
+
+      <label>End Year</label>
+      <input type="text" name="companyEnd" placeholder="End year" value="{{ resume.companyEnd }}">
+
+      <label>Company work description</label>
+      <input type="text" name="companyWorkDescription" placeholder="End year" value="{{ resume.companyWorkDescription }}">
+    </div>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="project">
+    <label>Project Name</label>
+    <input type="text" name="projectName" placeholder="Project name" value="{{ resume.projectName }}">
+
+    <label>Year</label>
+    <input type="text" name="projectTime" placeholder="Year" value="{{ resume.projectTime }}">
+
+    <label>Problem Solved</label>
+    <input type="text" name="projectWhatYouSolved" placeholder="Problem solved" value="{{ resume.projectWhatYouSolved }}">
+
+    <label>How You Solved It</label>
+    <input type="text" name="projectHowYouSolved" placeholder="How you solved it" value="{{ resume.projectHowYouSolved }}">
+
+    <label>Tools Used</label>
+    <input type="text" name="projectToolsUsed" placeholder="Tools used" value="{{ resume.projectToolsUsed }}">
+  </div>
+
+  <h2>Achievements</h2>
+  <div class="achievements">
+    <label>Your Achievements</label>
+    <input type="text" name="achievements" placeholder="Your achievements" value="{{ resume.achievements }}">
+  </div>
+
+  <button type="submit">Update</button>
+</form>
+
+
+{% endblock %}

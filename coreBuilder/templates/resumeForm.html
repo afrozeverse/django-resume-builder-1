@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% comment %} ******* done ***** {% endcomment %}
+{% load static %}
+{% block title %}Resume Builder Form{% endblock %}
+{% block linkCSS %}
+<link rel="stylesheet" href="{% static "coreBuilder/resumeFormStyle.css" %}">
+ {% endblock %}
+{% block content %}
+<div class="heading">
+    <h1>Resume Builder Form</h1>
+    <hr>
+</div>
+
+<form method="post" class="resume-form">
+  {% csrf_token %}
+    <h2>Personal Details</h2>
+    <div class="personal">
+      <input type="text" name="firstName" placeholder="First name" required>
+      <input type="text" name="lastName" placeholder="Last name">
+      <input type="text" name="mobileNumber" placeholder="Mobile number">
+      <input type="text" name="email" placeholder="Email">
+      <input type="text" name="portfolioLink" placeholder="Portfolio link">
+      <input type="text" name="linkedinLink" placeholder="LinkedIn link">
+    </div>
+
+    <h2>Summary</h2>
+    <div class="summary">
+      <textarea name="summary" placeholder="Profile summary (max 3 sentences)"></textarea>
+    </div>
+
+    <h2>Education</h2>
+    <div class="education">
+      <input type="text" name="collegeName" placeholder="College name">
+      <input type="text" name="collegeBranch" placeholder="Branch">
+      <input type="text" name="collegeLocation" placeholder="Location">
+      <div class="education-duration">
+        <input type="text" name="collegeStart" placeholder="Start year">
+        <input type="text" name="collegeEnd" placeholder="End year" value="Present">
+      </div>
+      <input type="text" name="collegeAchivements" placeholder="Achivemnts in college">
+    </div>
+
+    <h2>Skills</h2>
+    <div class="skills">
+      <input type="text" name="skillsTechnical" placeholder="Technical skills (comma-separated)">
+      <input type="text" name="skillsTools" placeholder="Known tools (comma-separated)">
+    </div>
+
+    <h2>Certifications</h2>
+    <div class="certifications">
+      <input type="text" name="certificate1" placeholder="Certificate name">
+      <input type="text" name="certificate1Link" placeholder="Certificate link">
+      <input type="text" name="certificate2" placeholder="Certificate name">
+      <input type="text" name="certificate2Link" placeholder="Certificate link">
+    </div>
+
+    <h2>Experience</h2>
+    <div class="company">
+      <input type="text" name="companyName" placeholder="Company name">
+      <input type="text" name="companyLocation" placeholder="Location">
+      <input type="text" name="companyPosition" placeholder="Position">
+      <div class="company-service-duration">
+        <input type="text" name="companyStart" placeholder="Start year">
+        <input type="text" name="companyEnd" placeholder="End year" value="Present">
+      </div>
+      
+      <input type="text" name="companyWorkDescription" placeholder="company Work Description">
+    </div>
+
+    <h2>Projects</h2>
+    <div class="project">
+      <input type="text" name="projectName" placeholder="Project name">
+      <input type="text" name="projectTime" placeholder="Year">
+      <input type="text" name="projectWhatYouSolved" placeholder="Problem solved">
+      <input type="text" name="projectHowYouSolved" placeholder="How you solved it">
+      <input type="text" name="projectToolsUsed" placeholder="Tools used">
+    </div>
+
+    <h2>Achievements</h2>
+    <div class="achievements">
+      <input type="text" name="achievements" placeholder="Your achievements">
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+          
+{% endblock %}

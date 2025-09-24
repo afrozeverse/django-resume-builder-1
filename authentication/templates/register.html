@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register{% endblock %}
+
+{% block linkCSS %}
+<link rel="stylesheet" href="{% static "authentication/register-style.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="register-form-container">
+        <!-- Registration form -->
+        <form class="register-form-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  <!-- CSRF token for security -->
+
+            <!-- Registration form heading -->
+            <h1><span>Register</span></h1>
+
+                        <div class="register-image">
+                <img src="{% static "authentication/register_logo.svg" %}" alt="register_image">
+            </div>
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- First Name input field -->
+            <div class="" >
+                <input type="text" class="" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter First name" name="first_name" required>
+            </div>
+
+            <!-- Last Name input field -->
+            <div class="">
+                <input type="text" name="last_name" class="" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter Last name" required>
+            </div>
+
+            <!-- Username input field -->
+            <div class="">
+                <input type="text" class="" name="username" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter username" required>
+            </div>
+
+            <!-- Password input field -->
+            <div class="">
+                <input type="password" class="" name="password" id="exampleInputPassword1"
+                    placeholder="Password" required>
+            </div>
+
+            <!-- Link to login page for users who already have an account -->
+            <p class="register-form-para">Already have an account <a href="{% url "login" %}">Login</a> </p>
+
+            <!-- Submit button -->
+            <button type="submit" class="">Register</button>
+        </form>
+    </div>
+{% endblock %}

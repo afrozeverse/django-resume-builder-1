@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Resume{% endblock %}
+{% block linkCSS %} 
+
+<style>
+    @page{
+        margin:0mm;
+    }
+        ul {
+        margin-top: 5px;
+    }
+
+    body {
+        margin: 0;
+        padding: 12.7mm;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .section1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .section1 h1 {
+        font-size: 16pt;
+    }
+
+    p,
+    a,
+    li {
+        font-size: 11pt;
+    }
+
+    .section1 a {
+        text-decoration: none;
+        color: black;
+    }
+
+    h2 {
+        color: gray;
+        margin-bottom: 5;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+
+    .education-institute-details,
+    .experience-section1,
+    .projects-section1 {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .skills-technical p, .education-institute-details p, .experience-section1 p, .projects-section1 p{
+        margin-bottom:0;
+    }
+</style>
+
+{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="section1">
+            <h1> <b> {{ data.firstName }} 
+                {% if data.lastName %} {{ data.lastName }} {% endif %}
+            </b></h1>
+            <div class="section1-subsection">
+                
+                {% if data.mobileNumber %} <a href="tel:+91-{{ data.mobileNumber }}">{{ data.mobileNumber }}</a>{% endif %}
+                {% if data.email %} |
+                <a href="mailto:{{ data.email }}">{{ data.email }}</a>{% endif %}
+                {% if data.portfolioLink %} |
+                <a href="{{ data.portfolioLink }}">portfolio</a>
+                {% endif %}
+                {% if data.linkedinLink %} |
+                <a href="{{ data.linkedinLink }}">linkedin</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if data.summary %}
+        <div class="profile">
+            <h2>PROFILE</h2>
+            <p>{{ data.summary }}</p>
+        </div>
+        {% endif %}
+
+        {% if data.collegeName %}
+        <div class="education">
+            <h2>EDUCATION</h2>
+            <div class="education-institute-details">
+                <div class="education-institute-details-left">
+                    <p>{{ data.collegeName }}</p>
+                    {% if data.collegeBranch %}
+                    <p>{{ data.collegeBranch }} </p>
+                    {% endif %}
+                </div>
+                <div class="education-institute-details-right">
+                    {% if data.collegeLocation %}
+                    <p><i>{{ data.collegeLocation }}</i></p>
+                    {% endif %}
+                    {% if data.collegeStart %}
+                    <p>{{ data.collegeStart }} - {{ data.collegeEnd }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="education-institute-details-achivements">
+                <ul>
+                    <li><p>{{ data.collegeAchivements }}</p></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        {% if data.skillsTechnical or data.skillsTools %}
+        <div class="skills">
+            <h2>SKILLS</h2>
+            {% if data.skillsTechnical %}
+            <div class="skills-technical">
+                <p> <b>Technical: </b> {{ data.skillsTechnical }}
+                </p>
+            </div>
+            {% endif %}
+            {% if data.skillsTools %}
+            <div class="skills-tools">
+                <p> <b>Tools: </b>{{ data.skillsTools }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if data.certificate1 or data.certificate2 %}
+        <div class="certifications">
+            <h2>CERTIFICATIONS</h2>
+            <ul>
+                {% if data.certificate1 %}
+                <li>
+                    {{ data.certificate1 }}  
+                    {% if data.certificate1Link %} (<a href="{{ data.certificate1Link }}">link</a>) {% endif %}
+                </li>
+                {% endif %}
+
+                {% if data.certificate2 %}
+                <li>{{ data.certificate2 }} {% if data.certificate2Link %} (<a href="{{ data.certificate2Link }}">link</a>) {% endif %} </li>
+                {% endif %}
+            </ul>
+
+        </div>
+        {% endif %}
+{% if data.companyName %}
+        <div class="experience">
+            <h2>EXPERIENCE</h2>
+            <div class="experience-section1">
+                <div class="experience-section1-left">
+                    <p>{{ data.companyName }}</p>
+                    {% if data.companyPosition %}
+                    <p><b>{{ data.companyPosition }}</b></p>
+                    {% endif %}
+                </div>
+                <div class="experience-section1-right">
+                    {% if data.companyLocation %}
+                    <p><i>{{ data.companyLocation }}</i></p>
+                    {% endif %}
+                    {% if data.companyStart %}
+                    <p>{{ data.companyStart }} - {{ data.companyEnd }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% if data.companyWorkDescription %}
+            <div class="experience-section2">
+                <ul>
+                    <li> {{data.companyWorkDescription}} </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+{% endif %}
+
+{% if data.projectName %}
+        <div class="projects">
+            <h2>PROJECTS</h2>
+            <div class="projects-section1">
+                <div>
+                    <p><b>{{ data.projectName }}</b></p>
+                </div>
+                {% if data.projectTime %}
+                <div>
+                    <p>{{ data.projectTime }}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="projects-section-2">
+                <ul>
+                    {% if data.projectHowYouSolved %}
+                    <li>{{ data.projectHowYouSolved }}</li>
+                    {% endif %}
+                    {% if data.projectToolsUsed %}
+                    <li>{{ data.projectToolsUsed }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+{% endif %}
+
+{% if data.achivements %}
+        <div class="achivements">
+            <h2>ACHIVEMENTS</h2>
+            <ul>
+                <li>{{ data.achievements }} </li>
+            </ul>
+        </div>
+{% endif %}
+    </div>
+
+{% endblock %}
+{% block addJS %}
+{% endblock %}

@@ -1,0 +1,37 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+class Resumes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    firstName = models.CharField(max_length=100, blank=True, null=True)
+    lastName = models.CharField(max_length=100, blank=True, null=True)
+    mobileNumber = models.CharField(max_length=15, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    portfolioLink = models.CharField(max_length=500, blank=True, null=True)
+    linkedinLink = models.CharField(max_length=500, blank=True, null=True)
+    summary = models.CharField(max_length=500, blank=True, null=True)
+    collegeName = models.CharField(max_length=100, blank=True, null=True)
+    collegeBranch = models.CharField(max_length=100, blank=True, null=True)
+    collegeLocation = models.CharField(max_length=100, blank=True, null=True)
+    collegeStart = models.CharField(max_length=100, blank=True, null=True)
+    collegeEnd = models.CharField(max_length=100, blank=True, null=True)
+    collegeAchivements = models.CharField(max_length=500, blank=True, null=True)
+    skillsTechnical = models.CharField(max_length=500, blank=True, null=True)
+    skillsTools = models.CharField(max_length=500, blank=True, null=True)
+    certificate1 = models.CharField(max_length=100, blank=True, null=True)
+    certificate1Link = models.CharField(max_length=500, blank=True, null=True)
+    certificate2 = models.CharField(max_length=100, blank=True, null=True)
+    certificate2Link = models.CharField(max_length=500, blank=True, null=True)
+    companyName = models.CharField(max_length=100, blank=True, null=True)
+    companyLocation = models.CharField(max_length=100, blank=True, null=True)
+    companyPosition = models.CharField(max_length=100, blank=True, null=True)
+    companyStart = models.CharField(max_length=100, blank=True, null=True)
+    companyEnd = models.CharField(max_length=100, blank=True, null=True)
+    projectName = models.CharField(max_length=100, blank=True, null=True)
+    companyWorkDescription = models.CharField(max_length=500, blank=True, null=True)
+    projectTime = models.CharField(max_length=100, blank=True, null=True)
+    projectHowYouSolved = models.CharField(max_length=500, blank=True, null=True)
+    projectToolsUsed = models.CharField(max_length=500, blank=True, null=True)
+    achievements = models.CharField(max_length=700, blank=True, null=True)
+    def __str__(self):
+        return self.user.username

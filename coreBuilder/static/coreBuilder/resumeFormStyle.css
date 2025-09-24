@@ -1,0 +1,122 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Form Container */
+.resume-form {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+/* Section Titles */
+.resume-form h2 {
+  margin: 20px 0 10px;
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Input & Textarea */
+.resume-form input,
+.resume-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.resume-form input:focus,
+.resume-form textarea:focus {
+  border-color: #888;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+/* Textarea */
+.resume-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Duration Inputs in Flex */
+.education-duration,
+.company-service-duration {
+  display: flex;
+  gap: 10px;
+}
+
+.education-duration input,
+.company-service-duration input {
+  flex: 1;
+}
+
+/* Professional Button */
+.resume-form button {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  border: none;
+  background-color: #42D674; /* solid professional green */
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.resume-form button:hover {
+  background-color: #38b864; /* slightly darker green */
+  transform: translateY(-1px);
+}
+
+.resume-form button:active {
+  background-color: #2e9a52; /* even darker for click */
+  transform: translateY(0);
+}
+
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .resume-form {
+    padding: 15px;
+  }
+  .resume-form h2 {
+    font-size: 1rem;
+  }
+}
+
+
+.heading {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.heading h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.heading hr {
+    width: 80px;
+    height: 4px;
+    background-color: #42D674; /* your green */
+    border: none;
+    margin: 0 auto;
+    border-radius: 2px;
+}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Resume{% endblock %}
+{% block linkCSS %} <link rel="stylesheet" href="{% static "coreBuilder/resumeTemplateStyle.css" %}"> {% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+   <div class="container">
+        <div class="section1">
+            <h1> <b> {{ data.firstName }} 
+                {% if data.lastName %} {{ data.lastName }} {% endif %}
+            </b></h1>
+            <div class="section1-subsection">
+                
+                {% if data.mobileNumber %} <a href="tel:+91-{{ data.mobileNumber }}">{{ data.mobileNumber }}</a>{% endif %}
+                {% if data.email %} |
+                <a href="mailto:{{ data.email }}">{{ data.email }}</a>{% endif %}
+                {% if data.portfolioLink %} |
+                <a href="{{ data.portfolioLink }}">portfolio</a> |
+                {% endif %}
+                {% if data.linkedinLink %}
+                <a href="{{ data.linkedinLink }}">linkedin</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if data.summary %}
+        <div class="profile">
+            <h2>PROFILE</h2>
+            <p>{{ data.summary }}</p>
+        </div>
+        {% endif %}
+
+        {% if data.collegeName %}
+        <div class="education">
+            <h2>EDUCATION</h2>
+            <div class="education-institute-details">
+                <div class="education-institute-details-left">
+                    <p>{{ data.collegeName }}</p>
+                    {% if data.collegeBranch %}
+                    <p>{{ data.collegeBranch }} </p>
+                    {% endif %}
+                </div>
+                <div class="education-institute-details-right">
+                    {% if data.collegeLocation %}
+                    <p><i>{{ data.collegeLocation }}</i></p>
+                    {% endif %}
+                    {% if data.collegeStart %}
+                    <p>{{ data.collegeStart }} - {{ data.collegeEnd }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="education-institute-details-achivements">
+                <ul>
+                    <li><p>{{ data.collegeAchivements }}</p></li> 
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        {% if data.skillsTechnical or data.skillsTools %}
+        <div class="skills">
+            <h2>SKILLS</h2>
+            {% if data.skillsTechnical %}
+            <div class="skills-technical">
+                <p> <b>Technical: </b> {{ data.skillsTechnical }}
+                </p>
+            </div>
+            {% endif %}
+            {% if data.skillsTools %}
+            <div class="skills-tools">
+                <p> <b>Tools: </b>{{ data.skillsTools }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if data.certificate1 or data.certificate2 %}
+        <div class="certifications">
+            <h2>CERTIFICATIONS</h2>
+            <ul>
+                {% if data.certificate1 %}
+                <li>
+                    {{ data.certificate1 }}  
+                    {% if data.certificate1Link %} (<a href="{{ data.certificate1Link }}">link</a>) {% endif %}
+                </li>
+                {% endif %}
+
+                {% if data.certificate2 %}
+                <li>{{ data.certificate2 }} {% if data.certificate2Link %} (<a href="{{ data.certificate2Link }}">link</a>) {% endif %} </li>
+                {% endif %}
+            </ul>
+
+        </div>
+        {% endif %}
+{% if data.companyName %}
+        <div class="experience">
+            <h2>EXPERIENCE</h2>
+            <div class="experience-section1">
+                <div class="experience-section1-left">
+                    <p>{{ data.companyName }}</p>
+                    {% if data.companyPosition %}
+                    <p><b>{{ data.companyPosition }}</b></p>
+                    {% endif %}
+                </div>
+                <div class="experience-section1-right">
+                    {% if data.companyLocation %}
+                    <p><i>{{ data.companyLocation }}</i></p>
+                    {% endif %}
+                    {% if data.companyStart %}
+                    <p>{{ data.companyStart }} - {{ data.companyEnd }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% if data.companyWorkDescription %}
+            <div class="experience-section2">
+                <ul>
+                    <li> {{data.companyWorkDescription}} </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+{% endif %}
+
+{% if data.projectName %}
+        <div class="projects">
+            <h2>PROJECTS</h2>
+            <div class="projects-section1">
+                <div>
+                    <p><b>{{ data.projectName }}</b></p>
+                </div>
+                {% if data.projectTime %}
+                <div>
+                    <p>{{ data.projectTime }}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="projects-section-2">
+                <ul>
+                    {% if data.projectHowYouSolved %}
+                    <li>{{ data.projectHowYouSolved }}</li>
+                    {% endif %}
+                    {% if data.projectToolsUsed %}
+                    <li>{{ data.projectToolsUsed }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+{% endif %}
+
+{% if data.achivements %}
+        <div class="achivements">
+            <h2>ACHIVEMENTS</h2>
+            <ul>
+                <li>{{ data.achievements }} </li>
+            </ul>
+        </div>
+{% endif %}
+    </div>
+
+<form method="post" action="{% url 'saveResume' %}">
+    {% csrf_token %}
+    
+    <!-- hidden inputs -->
+    <input type="hidden" name="firstName" value="{{ data.firstName }}">
+    <input type="hidden" name="lastName" value="{{ data.lastName }}">
+    <input type="hidden" name="mobileNumber" value="{{ data.mobileNumber }}">
+    <input type="hidden" name="email" value="{{ data.email }}">
+    <input type="hidden" name="portfolioLink" value="{{ data.portfolioLink }}">
+    <input type="hidden" name="linkedinLink" value="{{ data.linkedinLink }}">
+    <input type="hidden" name="summary" value="{{ data.summary }}">
+    <input type="hidden" name="collegeName" value="{{ data.collegeName }}">
+    <input type="hidden" name="collegeBranch" value="{{ data.collegeBranch }}">
+    <input type="hidden" name="collegeLocation" value="{{ data.collegeLocation }}">
+    <input type="hidden" name="collegeStart" value="{{ data.collegeStart }}">
+    <input type="hidden" name="collegeEnd" value="{{ data.collegeEnd }}">
+    <input type="hidden" name="collegeAchivements" value="{{ data.collegeAchivements }}">
+    <input type="hidden" name="skillsTechnical" value="{{ data.skillsTechnical }}">
+    <input type="hidden" name="skillsTools" value="{{ data.skillsTools }}">
+    <input type="hidden" name="certificate1" value="{{ data.certificate1 }}">
+    <input type="hidden" name="certificate1Link" value="{{ data.certificate1Link }}">
+    <input type="hidden" name="certificate2" value="{{ data.certificate2 }}">
+    <input type="hidden" name="certificate2Link" value="{{ data.certificate2Link }}">
+    <input type="hidden" name="companyName" value="{{ data.companyName }}">
+    <input type="hidden" name="companyPosition" value="{{ data.companyPosition }}">
+    <input type="hidden" name="companyLocation" value="{{ data.companyLocation }}">
+    <input type="hidden" name="companyStart" value="{{ data.companyStart }}">
+    <input type="hidden" name="companyEnd" value="{{ data.companyEnd }}">
+    <input type="hidden" name="companyWorkDescription" value="{{ data.companyWorkDescription }}">
+    <input type="hidden" name="projectName" value="{{ data.projectName }}">
+    <input type="hidden" name="projectTime" value="{{ data.projectTime }}">
+    <input type="hidden" name="projectHowYouSolved" value="{{ data.projectHowYouSolved }}">
+    <input type="hidden" name="projectToolsUsed" value="{{ data.projectToolsUsed }}">
+    <input type="hidden" name="achievements" value="{{ data.achievements }}">
+
+    <!-- only button is visible -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success mb-4">Save</button>
+    </div>
+</form>
+
+
+{% endblock %}
+{% block addJS %}
+{% endblock %}

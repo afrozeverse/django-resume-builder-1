@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+{% comment %} ******* pending ***** {% endcomment %}
+{% load static %}
+{% block title %}My Resumes{% endblock %}
+{% block linkCSS %} 
+
+<link rel="stylesheet" href="{% static "coreBuilder/myResumesStyle.css" %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="heading">
+    <h1>My Resumes</h1>
+    <hr>
+</div>
+<div class="super-container">
+{% if resumes %}
+{% for resume in resumes %}
+<div class="container">
+    <div class="section1">
+        <h1>
+            {% if resume.firstName %} {{ resume.firstName }} {% endif %}
+            {% if resume.lastName %} {{ resume.lastName }} {% endif %}
+        </h1>
+        <div class="section1-subsection">
+            {% if resume.mobileNumber %}
+            <a href="tel:+91-{{ resume.mobileNumber }}">{{ resume.mobileNumber }}</a>
+            {% endif %}
+            {% if resume.email %} |
+            <a href="mailto:{{ resume.email }}">{{ resume.email }}</a>
+            {% endif %}
+            {% if resume.portfolioLink %} |
+            <a href="{{ resume.portfolioLink }}">portfolio</a> |
+            {% endif %}
+            {% if resume.linkedinLink %}
+            <a href="{{ resume.linkedinLink }}">linkedin</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if resume.summary %}
+    <div class="profile">
+        <h2>PROFILE</h2>
+        <p>{{ resume.summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if resume.collegeName %}
+    <div class="education">
+        <h2>EDUCATION</h2>
+        <div class="education-institute-details">
+            <div class="education-institute-details-left">
+                <p>{{ resume.collegeName }}</p>
+                {% if resume.collegeBranch %}
+                <p>{{ resume.collegeBranch }}</p>
+                {% endif %}
+            </div>
+            <div class="education-institute-details-right">
+                {% if resume.collegeLocation %}
+                <p><i>{{ resume.collegeLocation }}</i></p>
+                {% endif %}
+                {% if resume.collegeStart %}
+                <p>{{ resume.collegeStart }} - {{ resume.collegeEnd }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% if resume.collegeAchivements %}
+        <div class="education-institute-details-achivements">
+            <ul>
+                <li><p>{{ resume.collegeAchivements }}</p></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if resume.skillsTechnical or resume.skillsTools %}
+    <div class="skills">
+        <h2>SKILLS</h2>
+        {% if resume.skillsTechnical %}
+        <div class="skills-technical">
+            <p><b>Technical: </b> {{ resume.skillsTechnical }}</p>
+        </div>
+        {% endif %}
+        {% if resume.skillsTools %}
+        <div class="skills-tools">
+            <p><b>Tools: </b> {{ resume.skillsTools }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if resume.certificate1 or resume.certificate2 %}
+    <div class="certifications">
+        <h2>CERTIFICATIONS</h2>
+        <ul>
+            {% if resume.certificate1 %}
+            <li>
+                {{ resume.certificate1 }}
+                {% if resume.certificate1Link %} (<a href="{{ resume.certificate1Link }}">link</a>) {% endif %}
+            </li>
+            {% endif %}
+            {% if resume.certificate2 %}
+            <li>
+                {{ resume.certificate2 }}
+                {% if resume.certificate2Link %} (<a href="{{ resume.certificate2Link }}">link</a>) {% endif %}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if resume.companyName %}
+    <div class="experience">
+        <h2>EXPERIENCE</h2>
+        <div class="experience-section1">
+            <div class="experience-section1-left">
+                <p>{{ resume.companyName }}</p>
+                {% if resume.companyPosition %}
+                <p><b>{{ resume.companyPosition }}</b></p>
+                {% endif %}
+            </div>
+            <div class="experience-section1-right">
+                {% if resume.companyLocation %}
+                <p><i>{{ resume.companyLocation }}</i></p>
+                {% endif %}
+                {% if resume.companyStart %}
+                <p>{{ resume.companyStart }} - {{ resume.companyEnd }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% if resume.companyWorkDescription %}
+        <div class="experience-section2">
+            <ul>
+                <li> {{resume.companyWorkDescription}} </li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if resume.projectName %}
+    <div class="projects">
+        <h2>PROJECTS</h2>
+        <div class="projects-section1">
+            <div>
+                <p><b>{{ resume.projectName }}</b></p>
+            </div>
+            {% if resume.projectTime %}
+            <div>
+                <p>{{ resume.projectTime }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="projects-section-2">
+            <ul>
+                {% if resume.projectHowYouSolved %}
+                <li>{{ resume.projectHowYouSolved }}</li>
+                {% endif %}
+                {% if resume.projectToolsUsed %}
+                <li>{{ resume.projectToolsUsed }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if resume.achievements %}
+    <div class="achivements">
+        <h2>ACHIVEMENTS</h2>
+        <ul>
+            <li>{{ resume.achievements }}</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+
+<form method="post" action="{% url 'saveResume' %}">
+    {% csrf_token %}
+    
+    <!-- hidden inputs -->
+    <input type="hidden" name="firstName" value="{{ resume.firstName }}">
+    <input type="hidden" name="lastName" value="{{ resume.lastName }}">
+    <input type="hidden" name="mobileNumber" value="{{ resume.mobileNumber }}">
+    <input type="hidden" name="email" value="{{ resume.email }}">
+    <input type="hidden" name="portfolioLink" value="{{ resume.portfolioLink }}">
+    <input type="hidden" name="linkedinLink" value="{{ resume.linkedinLink }}">
+    <input type="hidden" name="summary" value="{{ resume.summary }}">
+    <input type="hidden" name="collegeName" value="{{ resume.collegeName }}">
+    <input type="hidden" name="collegeBranch" value="{{ resume.collegeBranch }}">
+    <input type="hidden" name="collegeLocation" value="{{ resume.collegeLocation }}">
+    <input type="hidden" name="collegeStart" value="{{ resume.collegeStart }}">
+    <input type="hidden" name="collegeEnd" value="{{ resume.collegeEnd }}">
+    <input type="hidden" name="skillsTechnical" value="{{ resume.skillsTechnical }}">
+    <input type="hidden" name="skillsTools" value="{{ resume.skillsTools }}">
+    <input type="hidden" name="certificate1" value="{{ resume.certificate1 }}">
+    <input type="hidden" name="certificate1Link" value="{{ resume.certificate1Link }}">
+    <input type="hidden" name="certificate2" value="{{ resume.certificate2 }}">
+    <input type="hidden" name="certificate2Link" value="{{ resume.certificate2Link }}">
+    <input type="hidden" name="companyName" value="{{ resume.companyName }}">
+    <input type="hidden" name="companyPosition" value="{{ resume.companyPosition }}">
+    <input type="hidden" name="companyLocation" value="{{ resume.companyLocation }}">
+    <input type="hidden" name="companyStart" value="{{ resume.companyStart }}">
+    <input type="hidden" name="companyEnd" value="{{ resume.companyEnd }}">
+    <input type="hidden" name="companyWorkDescription" value="{{ resume.companyWorkDescription }}">
+    <input type="hidden" name="projectName" value="{{ resume.projectName }}">
+    <input type="hidden" name="projectTime" value="{{ resume.projectTime }}">
+    <input type="hidden" name="projectHowYouSolved" value="{{ resume.projectHowYouSolved }}">
+    <input type="hidden" name="projectToolsUsed" value="{{ resume.projectToolsUsed }}">
+    <input type="hidden" name="achievements" value="{{ resume.achievements }}">
+
+    <!-- only button is visible -->
+<div class="buttons-container">
+    <a href="{% url "editResume" resume.id%}" class="btn edit">Edit</a>
+    <a href="{% url "downloadResume" resume.id%}" target="_blank" class="btn download">Download</a>
+    <a href="{% url "deleteResume" resume.id%}" class="btn delete">Delete</a>
+</div>
+
+</form>
+    {% endfor %}
+
+
+{% else %}
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+  <div class="row w-100 justify-content-center">
+    <div class="col-11 col-sm-10 col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4 p-4 text-center">
+
+        <!-- Illustration -->
+        <div class="mb-4">
+          <img src="{% static 'coreBuilder/empty_logo_myresumes.svg' %}" 
+               alt="Illustration" 
+               class="img-fluid mx-auto d-block"
+               style="max-height: 220px;">
+        </div>
+
+        <!-- Text -->
+        <h3 class="fw-bold text-dark mb-2">No Saved Resumes</h3>
+        <p class="text-muted mb-4">
+          Looks like you haven’t created a resume yet. Start building your professional resume now!
+        </p>
+
+        <!-- Button -->
+        <a href="{% url 'resumeForm' %}" 
+           class="button">
+          Create One
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      width: 100%;
+      background: #42D674;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #E3F0A3;
+    }
+
+    /* Hamburger Button */
+    .menu-toggle {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      cursor: pointer;
+      display: none;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: white;
+      border-radius: 2px;
+      transition: 0.4s;
+    }
+
+    .menu-toggle span:nth-child(1) {
+      top: 0;
+    }
+
+    .menu-toggle span:nth-child(2) {
+      top: 9px;
+    }
+
+    .menu-toggle span:nth-child(3) {
+      top: 18px;
+    }
+
+    /* Animate to "X" */
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 9px;
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 9px;
+    }
+
+    /* Drawer Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        width: 250px;
+        background: #42d673f6;
+        flex-direction: column;
+        padding-top: 60px;
+        padding-left: 20px;
+        transition: left 0.4s ease;
+      }
+
+      .nav-links a {
+        padding: 12px 0;
+        font-size: 1.1rem;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
