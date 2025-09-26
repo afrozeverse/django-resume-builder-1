@@ -28,7 +28,7 @@ Database: SQLite
 
 Clone the repo
 
-git clone https://github.com/your-username/django-resume-builder.git
+git clone https://github.com/afrozeverse/django-resume-builder-1.git
 cd django-resume-builder
 
 
